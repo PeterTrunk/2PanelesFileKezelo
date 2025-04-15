@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\TrunksCommander\bin\Debug\TrunksCommander.exe.config
+C:\Users\User\Desktop\TrunksCommander\bin\Debug\TrunksCommander.exe
+C:\Users\User\Desktop\TrunksCommander\bin\Debug\TrunksCommander.pdb
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.MainForm.resources
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.Properties.Resources.resources
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.csproj.GenerateResource.cache
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.exe
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.pdb
+C:\Users\User\Desktop\TrunksCommander\obj\Debug\TrunksCommander.NewFolderForm.resources

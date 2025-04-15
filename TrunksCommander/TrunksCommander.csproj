@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52E4DBDE-C035-47AC-B374-A7792A990D8B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TrunksCommander</RootNamespace>
+    <AssemblyName>TrunksCommander</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomFileManager.cs" />
+    <Compile Include="IFileManager.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFolderForm.Designer.cs">
+      <DependentUpon>NewFolderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewFolderForm.resx">
+      <DependentUpon>NewFolderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\shell32_1.ico" />
+    <Content Include="Images\shell32_10.ico" />
+    <Content Include="Images\shell32_1001.cur" />
+    <Content Include="Images\shell32_1001.ico" />
+    <Content Include="Images\shell32_1002.cur" />
+    <Content Include="Images\shell32_1002.ico" />
+    <Content Include="Images\shell32_1003.cur" />
+    <Content Include="Images\shell32_1003.ico" />
+    <Content Include="Images\shell32_1004.cur" />
+    <Content Include="Images\shell32_1004.ico" />
+    <Content Include="Images\shell32_1005.cur" />
+    <Content Include="Images\shell32_1005.ico" />
+    <Content Include="Images\shell32_1006.ico" />
+    <Content Include="Images\shell32_1007.ico" />
+    <Content Include="Images\shell32_1008.ico" />
+    <Content Include="Images\shell32_1009.ico" />
+    <Content Include="Images\shell32_1010.ico" />
+    <Content Include="Images\shell32_1011.ico" />
+    <Content Include="Images\shell32_11.ico" />
+    <Content Include="Images\shell32_12.ico" />
+    <Content Include="Images\shell32_13.ico" />
+    <Content Include="Images\shell32_133.ico" />
+    <Content Include="Images\shell32_134.ico" />
+    <Content Include="Images\shell32_135.ico" />
+    <Content Include="Images\shell32_137.ico" />
+    <Content Include="Images\shell32_138.ico" />
+    <Content Include="Images\shell32_139.ico" />
+    <Content Include="Images\shell32_14.ico" />
+    <Content Include="Images\shell32_140.ico" />
+    <Content Include="Images\shell32_141.ico" />
+    <Content Include="Images\shell32_142.ico" />
+    <Content Include="Images\shell32_143.ico" />
+    <Content Include="Images\shell32_144.ico" />
+    <Content Include="Images\shell32_145.ico" />
+    <Content Include="Images\shell32_146.ico" />
+    <Content Include="Images\shell32_147.ico" />
+    <Content Include="Images\shell32_148.ico" />
+    <Content Include="Images\shell32_15.ico" />
+    <Content Include="Images\shell32_151.ico" />
+    <Content Include="Images\shell32_152.ico" />
+    <Content Include="Images\shell32_153.ico" />
+    <Content Include="Images\shell32_154.ico" />
+    <Content Include="Images\shell32_155.ico" />
+    <Content Include="Images\shell32_156.ico" />
+    <Content Include="Images\shell32_157.ico" />
+    <Content Include="Images\shell32_16.ico" />
+    <Content Include="Images\shell32_160.ico" />
+    <Content Include="Images\shell32_161.ico" />
+    <Content Include="Images\shell32_165.ico" />
+    <Content Include="Images\shell32_166.ico" />
+    <Content Include="Images\shell32_167.ico" />
+    <Content Include="Images\shell32_16710.ico" />
+    <Content Include="Images\shell32_16715.ico" />
+    <Content Include="Images\shell32_16717.ico" />
+    <Content Include="Images\shell32_16718.ico" />
+    <Content Include="Images\shell32_16721.ico" />
+    <Content Include="Images\shell32_16739.ico" />
+    <Content Include="Images\shell32_16741.ico" />
+    <Content Include="Images\shell32_16742.ico" />
+    <Content Include="Images\shell32_16743.ico" />
+    <Content Include="Images\shell32_16744.ico" />
+    <Content Include="Images\shell32_16746.ico" />
+    <Content Include="Images\shell32_16747.ico" />
+    <Content Include="Images\shell32_16748.ico" />
+    <Content Include="Images\shell32_16749.ico" />
+    <Content Include="Images\shell32_16750.ico" />
+    <Content Include="Images\shell32_16751.ico" />
+    <Content Include="Images\shell32_16752.ico" />
+    <Content Include="Images\shell32_16753.ico" />
+    <Content Include="Images\shell32_16754.ico" />
+    <Content Include="Images\shell32_16755.ico" />
+    <Content Include="Images\shell32_16756.ico" />
+    <Content Include="Images\shell32_16757.ico" />
+    <Content Include="Images\shell32_16758.ico" />
+    <Content Include="Images\shell32_16759.ico" />
+    <Content Include="Images\shell32_16760.ico" />
+    <Content Include="Images\shell32_16761.ico" />
+    <Content Include="Images\shell32_16762.ico" />
+    <Content Include="Images\shell32_16763.ico" />
+    <Content Include="Images\shell32_16767.ico" />
+    <Content Include="Images\shell32_16768.ico" />
+    <Content Include="Images\shell32_16769.ico" />
+    <Content Include="Images\shell32_16770.ico" />
+    <Content Include="Images\shell32_16771.ico" />
+    <Content Include="Images\shell32_16772.ico" />
+    <Content Include="Images\shell32_16773.ico" />
+    <Content Include="Images\shell32_16774.ico" />
+    <Content Include="Images\shell32_16775.ico" />
+    <Content Include="Images\shell32_16776.ico" />
+    <Content Include="Images\shell32_16777.ico" />
+    <Content Include="Images\shell32_16778.ico" />
+    <Content Include="Images\shell32_16779.ico" />
+    <Content Include="Images\shell32_16780.ico" />
+    <Content Include="Images\shell32_16781.ico" />
+    <Content Include="Images\shell32_16782.ico" />
+    <Content Include="Images\shell32_16783.ico" />
+    <Content Include="Images\shell32_16784.ico" />
+    <Content Include="Images\shell32_16787.ico" />
+    <Content Include="Images\shell32_16788.ico" />
+    <Content Include="Images\shell32_16789.ico" />
+    <Content Include="Images\shell32_16790.ico" />
+    <Content Include="Images\shell32_16791.ico" />
+    <Content Include="Images\shell32_16792.ico" />
+    <Content Include="Images\shell32_16793.ico" />
+    <Content Include="Images\shell32_16794.ico" />
+    <Content Include="Images\shell32_16795.ico" />
+    <Content Include="Images\shell32_16796.ico" />
+    <Content Include="Images\shell32_16797.ico" />
+    <Content Include="Images\shell32_16798.ico" />
+    <Content Include="Images\shell32_16799.ico" />
+    <Content Include="Images\shell32_168.ico" />
+    <Content Include="Images\shell32_16800.ico" />
+    <Content Include="Images\shell32_16801.ico" />
+    <Content Include="Images\shell32_16802.ico" />
+    <Content Include="Images\shell32_16803.ico" />
+    <Content Include="Images\shell32_16804.ico" />
+    <Content Include="Images\shell32_16805.ico" />
+    <Content Include="Images\shell32_16806.ico" />
+    <Content Include="Images\shell32_16807.ico" />
+    <Content Include="Images\shell32_16810.ico" />
+    <Content Include="Images\shell32_16811.ico" />
+    <Content Include="Images\shell32_16812.ico" />
+    <Content Include="Images\shell32_16813.ico" />
+    <Content Include="Images\shell32_16814.ico" />
+    <Content Include="Images\shell32_16817.ico" />
+    <Content Include="Images\shell32_16818.ico" />
+    <Content Include="Images\shell32_16819.ico" />
+    <Content Include="Images\shell32_16820.ico" />
+    <Content Include="Images\shell32_16821.ico" />
+    <Content Include="Images\shell32_16822.ico" />
+    <Content Include="Images\shell32_16823.ico" />
+    <Content Include="Images\shell32_16824.ico" />
+    <Content Include="Images\shell32_16825.ico" />
+    <Content Include="Images\shell32_16826.ico" />
+    <Content Include="Images\shell32_16827.ico" />
+    <Content Include="Images\shell32_169.ico" />
+    <Content Include="Images\shell32_17.ico" />
+    <Content Include="Images\shell32_170.ico" />
+    <Content Include="Images\shell32_171.ico" />
+    <Content Include="Images\shell32_172.ico" />
+    <Content Include="Images\shell32_173.ico" />
+    <Content Include="Images\shell32_174.ico" />
+    <Content Include="Images\shell32_175.ico" />
+    <Content Include="Images\shell32_176.ico" />
+    <Content Include="Images\shell32_177.ico" />
+    <Content Include="Images\shell32_178.ico" />
+    <Content Include="Images\shell32_179.ico" />
+    <Content Include="Images\shell32_18.ico" />
+    <Content Include="Images\shell32_180.ico" />
+    <Content Include="Images\shell32_181.ico" />
+    <Content Include="Images\shell32_182.ico" />
+    <Content Include="Images\shell32_183.ico" />
+    <Content Include="Images\shell32_184.ico" />
+    <Content Include="Images\shell32_185.ico" />
+    <Content Include="Images\shell32_186.ico" />
+    <Content Include="Images\shell32_187.ico" />
+    <Content Include="Images\shell32_19.ico" />
+    <Content Include="Images\shell32_191.ico" />
+    <Content Include="Images\shell32_192.ico" />
+    <Content Include="Images\shell32_193.ico" />
+    <Content Include="Images\shell32_194.ico" />
+    <Content Include="Images\shell32_196.ico" />
+    <Content Include="Images\shell32_197.ico" />
+    <Content Include="Images\shell32_198.ico" />
+    <Content Include="Images\shell32_199.ico" />
+    <Content Include="Images\shell32_2.ico" />
+    <Content Include="Images\shell32_20.ico" />
+    <Content Include="Images\shell32_200.ico" />
+    <Content Include="Images\shell32_21.ico" />
+    <Content Include="Images\shell32_210.ico" />
+    <Content Include="Images\shell32_22.ico" />
+    <Content Include="Images\shell32_220.ico" />
+    <Content Include="Images\shell32_221.ico" />
+    <Content Include="Images\shell32_222.ico" />
+    <Content Include="Images\shell32_223.ico" />
+    <Content Include="Images\shell32_224.ico" />
+    <Content Include="Images\shell32_225.ico" />
+    <Content Include="Images\shell32_226.ico" />
+    <Content Include="Images\shell32_227.ico" />
+    <Content Include="Images\shell32_228.ico" />
+    <Content Include="Images\shell32_229.ico" />
+    <Content Include="Images\shell32_23.ico" />
+    <Content Include="Images\shell32_230.ico" />
+    <Content Include="Images\shell32_231.ico" />
+    <Content Include="Images\shell32_232.ico" />
+    <Content Include="Images\shell32_233.ico" />
+    <Content Include="Images\shell32_234.ico" />
+    <Content Include="Images\shell32_235.ico" />
+    <Content Include="Images\shell32_236.ico" />
+    <Content Include="Images\shell32_237.ico" />
+    <Content Include="Images\shell32_238.ico" />
+    <Content Include="Images\shell32_239.ico" />
+    <Content Include="Images\shell32_24.ico" />
+    <Content Include="Images\shell32_240.ico" />
+    <Content Include="Images\shell32_241.ico" />
+    <Content Include="Images\shell32_242.ico" />
+    <Content Include="Images\shell32_243.ico" />
+    <Content Include="Images\shell32_244.ico" />
+    <Content Include="Images\shell32_245.ico" />
+    <Content Include="Images\shell32_246.ico" />
+    <Content Include="Images\shell32_247.ico" />
+    <Content Include="Images\shell32_248.ico" />
+    <Content Include="Images\shell32_249.ico" />
+    <Content Include="Images\shell32_25.ico" />
+    <Content Include="Images\shell32_250.ico" />
+    <Content Include="Images\shell32_251.ico" />
+    <Content Include="Images\shell32_252.ico" />
+    <Content Include="Images\shell32_253.ico" />
+    <Content Include="Images\shell32_254.ico" />
+    <Content Include="Images\shell32_255.ico" />
+    <Content Include="Images\shell32_256.ico" />
+    <Content Include="Images\shell32_257.ico" />
+    <Content Include="Images\shell32_258.ico" />
+    <Content Include="Images\shell32_259.ico" />
+    <Content Include="Images\shell32_26.ico" />
+    <Content Include="Images\shell32_260.ico" />
+    <Content Include="Images\shell32_261.ico" />
+    <Content Include="Images\shell32_262.ico" />
+    <Content Include="Images\shell32_263.ico" />
+    <Content Include="Images\shell32_264.ico" />
+    <Content Include="Images\shell32_265.ico" />
+    <Content Include="Images\shell32_266.ico" />
+    <Content Include="Images\shell32_267.ico" />
+    <Content Include="Images\shell32_268.ico" />
+    <Content Include="Images\shell32_269.ico" />
+    <Content Include="Images\shell32_27.ico" />
+    <Content Include="Images\shell32_270.ico" />
+    <Content Include="Images\shell32_271.ico" />
+    <Content Include="Images\shell32_272.ico" />
+    <Content Include="Images\shell32_273.ico" />
+    <Content Include="Images\shell32_274.ico" />
+    <Content Include="Images\shell32_275.ico" />
+    <Content Include="Images\shell32_276.ico" />
+    <Content Include="Images\shell32_277.ico" />
+    <Content Include="Images\shell32_278.ico" />
+    <Content Include="Images\shell32_279.ico" />
+    <Content Include="Images\shell32_28.ico" />
+    <Content Include="Images\shell32_281.ico" />
+    <Content Include="Images\shell32_282.ico" />
+    <Content Include="Images\shell32_283.ico" />
+    <Content Include="Images\shell32_284.ico" />
+    <Content Include="Images\shell32_289.ico" />
+    <Content Include="Images\shell32_29.ico" />
+    <Content Include="Images\shell32_290.ico" />
+    <Content Include="Images\shell32_291.ico" />
+    <Content Include="Images\shell32_292.ico" />
+    <Content Include="Images\shell32_293.ico" />
+    <Content Include="Images\shell32_294.ico" />
+    <Content Include="Images\shell32_295.ico" />
+    <Content Include="Images\shell32_296.ico" />
+    <Content Include="Images\shell32_297.ico" />
+    <Content Include="Images\shell32_298.ico" />
+    <Content Include="Images\shell32_299.ico" />
+    <Content Include="Images\shell32_3.ico" />
+    <Content Include="Images\shell32_30.ico" />
+    <Content Include="Images\shell32_300.ico" />
+    <Content Include="Images\shell32_301.ico" />
+    <Content Include="Images\shell32_302.ico" />
+    <Content Include="Images\shell32_303.ico" />
+    <Content Include="Images\shell32_304.ico" />
+    <Content Include="Images\shell32_305.ico" />
+    <Content Include="Images\shell32_306.ico" />
+    <Content Include="Images\shell32_307.ico" />
+    <Content Include="Images\shell32_308.ico" />
+    <Content Include="Images\shell32_309.ico" />
+    <Content Include="Images\shell32_31.ico" />
+    <Content Include="Images\shell32_310.ico" />
+    <Content Include="Images\shell32_311.ico" />
+    <Content Include="Images\shell32_312.ico" />
+    <Content Include="Images\shell32_313.ico" />
+    <Content Include="Images\shell32_314.ico" />
+    <Content Include="Images\shell32_315.ico" />
+    <Content Include="Images\shell32_316.ico" />
+    <Content Include="Images\shell32_317.ico" />
+    <Content Include="Images\shell32_318.ico" />
+    <Content Include="Images\shell32_319.ico" />
+    <Content Include="Images\shell32_32.ico" />
+    <Content Include="Images\shell32_320.ico" />
+    <Content Include="Images\shell32_321.ico" />
+    <Content Include="Images\shell32_322.ico" />
+    <Content Include="Images\shell32_323.ico" />
+    <Content Include="Images\shell32_324.ico" />
+    <Content Include="Images\shell32_325.ico" />
+    <Content Include="Images\shell32_326.ico" />
+    <Content Include="Images\shell32_327.ico" />
+    <Content Include="Images\shell32_328.ico" />
+    <Content Include="Images\shell32_329.ico" />
+    <Content Include="Images\shell32_33.ico" />
+    <Content Include="Images\shell32_330.ico" />
+    <Content Include="Images\shell32_331.ico" />
+    <Content Include="Images\shell32_337.ico" />
+    <Content Include="Images\shell32_338.ico" />
+    <Content Include="Images\shell32_34.ico" />
+    <Content Include="Images\shell32_35.ico" />
+    <Content Include="Images\shell32_36.ico" />
+    <Content Include="Images\shell32_37.ico" />
+    <Content Include="Images\shell32_37219.ico" />
+    <Content Include="Images\shell32_38.ico" />
+    <Content Include="Images\shell32_39.ico" />
+    <Content Include="Images\shell32_4.ico" />
+    <Content Include="Images\shell32_40.ico" />
+    <Content Include="Images\shell32_41.ico" />
+    <Content Include="Images\shell32_42.ico" />
+    <Content Include="Images\shell32_43.ico" />
+    <Content Include="Images\shell32_44.ico" />
+    <Content Include="Images\shell32_45.ico" />
+    <Content Include="Images\shell32_46.ico" />
+    <Content Include="Images\shell32_47.ico" />
+    <Content Include="Images\shell32_48.ico" />
+    <Content Include="Images\shell32_49.ico" />
+    <Content Include="Images\shell32_5.ico" />
+    <Content Include="Images\shell32_50.ico" />
+    <Content Include="Images\shell32_51.ico" />
+    <Content Include="Images\shell32_512.ico" />
+    <Content Include="Images\shell32_51380.ico" />
+    <Content Include="Images\shell32_51586.ico" />
+    <Content Include="Images\shell32_51680.ico" />
+    <Content Include="Images\shell32_51681.ico" />
+    <Content Include="Images\shell32_51682.ico" />
+    <Content Include="Images\shell32_51683.ico" />
+    <Content Include="Images\shell32_51684.ico" />
+    <Content Include="Images\shell32_51685.ico" />
+    <Content Include="Images\shell32_51686.ico" />
+    <Content Include="Images\shell32_51687.ico" />
+    <Content Include="Images\shell32_52.ico" />
+    <Content Include="Images\shell32_53.ico" />
+    <Content Include="Images\shell32_54.ico" />
+    <Content Include="Images\shell32_6.ico" />
+    <Content Include="Images\shell32_62998.ico" />
+    <Content Include="Images\shell32_62999.ico" />
+    <Content Include="Images\shell32_63000.ico" />
+    <Content Include="Images\shell32_63001.ico" />
+    <Content Include="Images\shell32_63008.ico" />
+    <Content Include="Images\shell32_63009.ico" />
+    <Content Include="Images\shell32_63010.ico" />
+    <Content Include="Images\shell32_63011.ico" />
+    <Content Include="Images\shell32_7.ico" />
+    <Content Include="Images\shell32_8.ico" />
+    <Content Include="Images\shell32_8240.ico" />
+    <Content Include="Images\shell32_9.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
