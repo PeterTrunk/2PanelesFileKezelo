@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include=".gitignore.txt" />
     <Content Include="Images\shell32_1.ico" />
     <Content Include="Images\shell32_10.ico" />
     <Content Include="Images\shell32_1001.cur" />

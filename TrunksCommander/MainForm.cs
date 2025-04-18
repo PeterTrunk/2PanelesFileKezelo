@@ -29,26 +29,15 @@ namespace TrunksCommander
             FileManager = new CustomFileManager(LeftSideList, RightSideList, IkonLista, LeftPathBox,RightPathBox,LeftLabel,RightLabel);
             string alaput = @"C:\";
             //TesztItem();
-            LVInicializacio(alaput);
-            FrissitsMeghajtokComboBox(LeftDrives);
-            FrissitsMeghajtokComboBox(RightDrives);
-
+            ControlInicializacio(alaput);
+            
         }
-        private void TesztItem()
-        {
-            ListViewItem item = new ListViewItem();
-            item.ImageKey = "folder.ico";
-            item.SubItems.Add("teszt_fajl");
-            item.SubItems.Add("Könyvtár");
-            item.SubItems.Add("12 KB");
-            item.SubItems.Add("2025.04.14 10:00");
-            LeftSideList.Items.Add(item);
-        }
-        private void LVInicializacio(string alaput)
+        private void ControlInicializacio(string alaput)
         {
             FileManager.BetoltKonyvtar(alaput, CustomFileManager.PanelSide.Bal,LeftLabel);
             FileManager.BetoltKonyvtar(alaput, CustomFileManager.PanelSide.Jobb, RightLabel);
-
+            FrissitsMeghajtokComboBox(LeftDrives);
+            FrissitsMeghajtokComboBox(RightDrives);
         }
         private void Frissit()
         {
@@ -60,8 +49,8 @@ namespace TrunksCommander
             Frissit();
         }
 
+        #region Navigacio
         //NAVIGÁCIÓ
-        //
         //
         private void LeftSideList_DoubleClick(object sender, EventArgs e)
         {
@@ -75,10 +64,18 @@ namespace TrunksCommander
         
         private void LVDoubleClick(ListView lv, PanelSide oldal,Label label)
         {
+            Valasztas(lv, oldal, label);
+        }
+        private void LVEnteresValasztas(ListView lv, PanelSide oldal, Label label)
+        {
+            Valasztas(lv, oldal, label);
+        }
+        private void Valasztas(ListView lv, PanelSide oldal, Label label)
+        {
             if (lv.SelectedItems.Count == 0)
                 return;
 
-            var kivalasztott = lv.SelectedItems[0];
+            ListViewItem kivalasztott = lv.SelectedItems[0];
             string nev = kivalasztott.SubItems[1].Text;
             string tipus = kivalasztott.SubItems[2].Text;
 
@@ -88,7 +85,7 @@ namespace TrunksCommander
                 string szuloUt = Directory.GetParent(aktualisUt)?.FullName;
 
                 if (!string.IsNullOrEmpty(szuloUt))
-                    FileManager.BetoltKonyvtar(szuloUt, oldal,label);
+                    FileManager.BetoltKonyvtar(szuloUt, oldal, label);
 
                 return;
             }
@@ -101,6 +98,7 @@ namespace TrunksCommander
                 FileManager.BetoltKonyvtar(ujUt, oldal, label);
             }
         }
+        
         private void FrissitsMeghajtokComboBox(ComboBox combo)
         {
             combo.Items.Clear();
@@ -147,32 +145,7 @@ namespace TrunksCommander
                 e.Handled = true;
             }
         }
-        private void LVEnteresValasztas(ListView lv, PanelSide oldal, Label label)
-        {
-            if (lv.SelectedItems.Count == 0)
-                return;
-
-            var selected = lv.SelectedItems[0];
-            string nev = selected.SubItems[1].Text;
-            string tipus = selected.SubItems[2].Text;
-
-            if (nev == "[..]")
-            {
-                string aktualisUt = FileManager.GetCurrentDirectory(oldal);
-                string szuloUt = Directory.GetParent(aktualisUt)?.FullName;
-
-                if (!string.IsNullOrEmpty(szuloUt))
-                    FileManager.BetoltKonyvtar(szuloUt, oldal, label);
-                return;
-            }
-
-            if (tipus == "Könyvtár")
-            {
-                string aktualisUt = FileManager.GetCurrentDirectory(oldal);
-                string ujUt = Path.Combine(aktualisUt, nev);
-                FileManager.BetoltKonyvtar(ujUt, oldal, label);
-            }
-        }
+        #endregion
 
         //MASOLÁS MOZGAZÁS TÖRLÉS stb gombok
         //
@@ -289,6 +262,11 @@ namespace TrunksCommander
                 Torles();
                 e.Handled = true;
             }
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.LeftSideList = new System.Windows.Forms.ListView();
             this.Icon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -78,7 +78,7 @@
             this.Datum});
             this.LeftSideList.HideSelection = false;
             this.LeftSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5});
+            listViewItem3});
             this.LeftSideList.Location = new System.Drawing.Point(23, 118);
             this.LeftSideList.Name = "LeftSideList";
             this.LeftSideList.Size = new System.Drawing.Size(432, 244);
@@ -138,7 +138,7 @@
             this.columnHeader5});
             this.RightSideList.HideSelection = false;
             this.RightSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem6});
+            listViewItem4});
             this.RightSideList.Location = new System.Drawing.Point(461, 118);
             this.RightSideList.Name = "RightSideList";
             this.RightSideList.Size = new System.Drawing.Size(429, 244);
@@ -301,6 +301,7 @@
             this.ExitButton.TabIndex = 12;
             this.ExitButton.Text = "Alt + F4 Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // LeftDrives
             // 
