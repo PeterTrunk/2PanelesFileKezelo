@@ -18,6 +18,8 @@ namespace TrunksCommander.Images
         TextBox JobbTB;
         Label BalLabel;
         Label JobbLabel;
+        Label BalMeretLabel;
+        Label JobbMeretLabel;
 
         public enum PanelSide
         {
@@ -25,7 +27,7 @@ namespace TrunksCommander.Images
             Jobb
         }
 
-        public CustomFileManager(ListView BalLV, ListView JobbLV, ImageList IkonLista, TextBox BalTB, TextBox JobbTB, Label BalLabel, Label JobbLabel)
+        public CustomFileManager(ListView BalLV, ListView JobbLV, ImageList IkonLista, TextBox BalTB, TextBox JobbTB, Label BalLabel, Label JobbLabel, Label BalMeretLabel, Label JobbMeretLabel)
         {
             this.BalLV = BalLV;
             this.JobbLV = JobbLV;
@@ -36,6 +38,8 @@ namespace TrunksCommander.Images
             ListViewElokeszit(JobbLV);
             this.BalLabel = BalLabel;
             this.JobbLabel = JobbLabel;
+            this.BalMeretLabel = BalMeretLabel;
+            this.JobbMeretLabel = JobbMeretLabel;
         }
 
         private void ListViewElokeszit(ListView lv)
@@ -64,7 +68,7 @@ namespace TrunksCommander.Images
 
                     celListView.Items.Add(item);
                 }
-                // Mappák
+                
                 int mappaCount = Directory.GetDirectories(eleres).Length;
                 foreach (string mappa in Directory.GetDirectories(eleres))
                 {
@@ -75,11 +79,10 @@ namespace TrunksCommander.Images
                     item.SubItems.Add("Könyvtár");
                     item.SubItems.Add("");
                     item.SubItems.Add(info.LastWriteTime.ToString("yyyy.MM.dd HH:mm"));
-                    celListView.Items.Add(item);
-                    
-                }
 
-                // Fájlok
+                    celListView.Items.Add(item);
+                }
+                
                 int fajlCount = Directory.GetFiles(eleres).Length;
                 foreach (string fajl in Directory.GetFiles(eleres))
                 {
@@ -93,15 +96,14 @@ namespace TrunksCommander.Images
                     item.SubItems.Add(kiterjesztes);
                     item.SubItems.Add((info.Length / 1024) + " KB");
                     item.SubItems.Add(info.LastWriteTime.ToString("yyyy.MM.dd HH:mm"));
+
                     celListView.Items.Add(item);
-                    
                 }
                 if (oldal == PanelSide.Bal)
                     BalTB.Text = eleres;
                 else
                     JobbTB.Text = eleres;
                 label.Text = string.Format("{0} könyvtár; {1} file",mappaCount,fajlCount);
-                
             }
             catch (Exception ex)
             {
@@ -112,10 +114,52 @@ namespace TrunksCommander.Images
                 BalTB.Text = eleres;
             else
                 JobbTB.Text = eleres;
-
-
         }
-        
+
+        #region Általábos segítő fgv-k
+
+        private string GetEgyediFajlNev(string celKonyvtar, string fajlNev)
+        {
+            //Windowshoz hasonlóan írja oda: filenév másolata, filenév másolata (1)...
+            string nev = Path.GetFileNameWithoutExtension(fajlNev);
+            string kiterjesztes = Path.GetExtension(fajlNev);
+
+            string elso = $"{nev} másolata{kiterjesztes}";
+            string elsoPath = Path.Combine(celKonyvtar, elso);
+            if (!File.Exists(elsoPath))
+                return elso;
+
+            int index = 1;
+            string ujNev;
+            do
+            {
+                ujNev = $"{nev} másolata ({index}){kiterjesztes}";
+                index++;
+            }
+            while (File.Exists(Path.Combine(celKonyvtar, ujNev)));
+
+            return ujNev;
+        }
+
+        private string GetEgyediMappaNev(string celSzulo, string mappaNev)
+        {
+            string elso = $"{mappaNev} másolata";
+            string elsoPath = Path.Combine(celSzulo, elso);
+            if (!Directory.Exists(elsoPath))
+                return elso;
+
+            int index = 1;
+            string ujNev;
+            do
+            {
+                ujNev = $"{mappaNev} másolata ({index})";
+                index++;
+            }
+            while (Directory.Exists(Path.Combine(celSzulo, ujNev)));
+
+            return ujNev;
+        }
+
         private string GetIkonKey(string ext)
         {
             if (ext == ".jpg" || ext == ".png") return "image.ico";
@@ -128,9 +172,10 @@ namespace TrunksCommander.Images
         {
             return oldal == PanelSide.Bal ? BalTB.Text : JobbTB.Text;
         }
+        #endregion
 
         #region Másolás
-        //Egyenlőre csak file másolás / áthelyezés... (egyszerűség)
+
         public void MasolVagyMozgatFajlokat(PanelSide forras, PanelSide cel, bool mozgat)
         {
             ListView forrasLV = forras == PanelSide.Bal ? BalLV : JobbLV;
@@ -142,40 +187,88 @@ namespace TrunksCommander.Images
                 string nev = item.SubItems[1].Text;
                 string tipus = item.SubItems[2].Text;
 
-                if (tipus != "Könyvtár") 
-                {
-                    string forrasFajl = Path.Combine(forrasUt, nev);
-                    string celFajl = Path.Combine(celUt, nev);
+                string forrasElem = Path.Combine(forrasUt, nev);
+                string celElem = Path.Combine(celUt, nev);
 
-                    try
+                try
+                {
+                    if (tipus == "Könyvtár")
                     {
                         if (mozgat)
-                            File.Move(forrasFajl, celFajl);
+                            Directory.Move(forrasElem, celElem);
                         else
-                            File.Copy(forrasFajl, celFajl, overwrite: true);
+                        {
+                            string egyediMappaNev = GetEgyediMappaNev(celUt, nev);
+                            string ujCelMappa = Path.Combine(celUt, egyediMappaNev);
+                            MasolMappat(forrasElem, ujCelMappa);
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        string operation = "";
-                        if (mozgat)
-                            operation = "mozgatni";
+                        if (File.Exists(celElem))
+                        {
+                            DialogResult valasz = MessageBox.Show(
+                                $"A fájl már létezik:\n{nev}\n\nFelülírja?",
+                                "Megerősítés",
+                                MessageBoxButtons.YesNoCancel,
+                                MessageBoxIcon.Question
+                            );
+
+                            if (valasz == DialogResult.Cancel)
+                                continue;
+                            else if (valasz == DialogResult.No)
+                            {
+                                // új név
+                                string ujNev = GetEgyediFajlNev(celUt, nev);
+                                string ujCelFajl = Path.Combine(celUt, ujNev);
+                                File.Copy(forrasElem, ujCelFajl);
+                            }
+                            else if (valasz == DialogResult.Yes)
+                                File.Copy(forrasElem, celElem, overwrite: true);
+                        }
                         else
-                            operation = "másolni";
-                        MessageBox.Show($"Nem sikerült "+operation+" a(z) "+nev+" fájlt:\n"+ex.Message,"Hiba",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                            File.Copy(forrasElem, celElem);
                     }
+                }
+                catch (Exception ex)
+                {
+                    string muvelet = mozgat ? "áthelyezni" : "másolni";
+                    MessageBox.Show($"Nem sikerült {muvelet} a(z) {nev} elemet:\n{ex.Message}", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
-            BetoltKonyvtar(celUt, cel, cel == PanelSide.Bal ? BalLabel : JobbLabel);
+            Label celLabel = cel == PanelSide.Bal ? BalLabel : JobbLabel;
+            BetoltKonyvtar(celUt, cel, celLabel);
             if (mozgat)
-                BetoltKonyvtar(forrasUt, forras, forras == PanelSide.Bal ? BalLabel : JobbLabel);
+            {
+                Label forrasLabel = forras == PanelSide.Bal ? BalLabel : JobbLabel;
+                BetoltKonyvtar(forrasUt, forras, forrasLabel);
+            }
         }
 
+        //Másolás/Mozgazás segítő fgv ha mappárol van szó, rekurzív.
+        private void MasolMappat(string forrasDir, string celDir)
+        {
+            Directory.CreateDirectory(celDir);
+            foreach (string fajl in Directory.GetFiles(forrasDir))
+            {
+                string fajlNev = Path.GetFileName(fajl);
+                string celFajl = Path.Combine(celDir, fajlNev);
+                File.Copy(fajl, celFajl, overwrite: true);
+            }
 
-        
+            foreach (string almappa in Directory.GetDirectories(forrasDir))
+            {
+                string mappaNev = Path.GetFileName(almappa);
+                string ujCelMappa = Path.Combine(celDir, mappaNev);
+                MasolMappat(almappa, ujCelMappa); //Rekurzió
+            }
+        }
+
         #endregion
 
-        //Új mappa
+        #region Új mappa
+
         public void LetrehozUjMappa(PanelSide oldal)
         {
             using (var dialog = new NewFolderForm())
@@ -201,7 +294,10 @@ namespace TrunksCommander.Images
             }
         }
 
-        //Törlés
+        #endregion
+
+        #region Törlés
+
         public void TorolKijelolteket(PanelSide oldal)
         {
             ListView lv = oldal == PanelSide.Bal ? BalLV : JobbLV;
@@ -246,5 +342,78 @@ namespace TrunksCommander.Images
             // Frissítés
             BetoltKonyvtar(aktualisUt, oldal, label);
         }
+
+        #endregion
+
+        #region Kijelölt méret számítása
+
+        public (int fajlDarab, long osszMeret) OsszKijeloltMeret(PanelSide oldal)
+        {
+            ListView lv = oldal == PanelSide.Bal ? BalLV : JobbLV;
+            string aktualisUt = GetCurrentDirectory(oldal);
+
+            int fajlSzam = 0;
+            long meret = 0;
+
+            foreach (ListViewItem item in lv.SelectedItems)
+            {
+                string nev = item.SubItems[1].Text;
+                string tipus = item.SubItems[2].Text;
+                string teljesUt = Path.Combine(aktualisUt, nev);
+
+                if (tipus == "Könyvtár")
+                {
+                    (int db, long m) = OsszMappaMeret(teljesUt);
+                    fajlSzam += db;
+                    meret += m;
+                }
+                else
+                {
+                    try
+                    {
+                        FileInfo info = new FileInfo(teljesUt);
+                        meret += info.Length;
+                        fajlSzam += 1;
+                    }
+                    catch
+                    {
+                        //IOexception, UnauthorizedAccess, stb kezelés esetleg késöbb.
+                    }
+                }
+            }
+
+            return (fajlSzam, meret);
+        }
+
+        //Segédfüggvény mappákban lévő fileok méret összegzésére
+        private (int fajlDb, long osszMeret) OsszMappaMeret(string mappaUt)
+        {
+            int db = 0;
+            long meret = 0;
+
+            try
+            {
+                foreach (string fajl in Directory.GetFiles(mappaUt, "*", SearchOption.AllDirectories))
+                {
+                    try
+                    {
+                        FileInfo info = new FileInfo(fajl);
+                        meret += info.Length;
+                        db++;
+                    }
+                    catch 
+                    {
+                        //IOexception, UnauthorizedAccess, stb kezelés esetleg késöbb.
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
+
+            return (db, meret);
+        }
+        #endregion
     }
 }

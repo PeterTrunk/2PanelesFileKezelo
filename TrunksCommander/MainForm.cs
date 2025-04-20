@@ -26,11 +26,9 @@ namespace TrunksCommander
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
-            FileManager = new CustomFileManager(LeftSideList, RightSideList, IkonLista, LeftPathBox,RightPathBox,LeftLabel,RightLabel);
+            FileManager = new CustomFileManager(LeftSideList, RightSideList, IkonLista, LeftPathBox,RightPathBox,LeftLabel,RightLabel,LeftOsszegLabel,RightOsszegLabel);
             string alaput = @"C:\";
-            //TesztItem();
             ControlInicializacio(alaput);
-            
         }
         private void ControlInicializacio(string alaput)
         {
@@ -38,15 +36,42 @@ namespace TrunksCommander
             FileManager.BetoltKonyvtar(alaput, CustomFileManager.PanelSide.Jobb, RightLabel);
             FrissitsMeghajtokComboBox(LeftDrives);
             FrissitsMeghajtokComboBox(RightDrives);
+            FrissitsKijeloltMeretet(PanelSide.Bal);
+            FrissitsKijeloltMeretet(PanelSide.Jobb);
+
         }
         private void Frissit()
         {
             FileManager.BetoltKonyvtar(LeftPathBox.Text, CustomFileManager.PanelSide.Bal, LeftLabel);
             FileManager.BetoltKonyvtar(RightPathBox.Text, CustomFileManager.PanelSide.Jobb, RightLabel);
         }
+
         private void frissítésToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Frissit();
+        }
+
+        private void FrissitsKijeloltMeretet(PanelSide oldal)
+        {
+            var (db, meret) = FileManager.OsszKijeloltMeret(oldal);
+
+            string text = $"{db} fájl kijelölve, összesen {FormatMeret(meret)}";
+            if (oldal == PanelSide.Bal)
+                LeftOsszegLabel.Text = text;
+            else
+                RightOsszegLabel.Text = text;
+        }
+
+        private string FormatMeret(long bytes)
+        {
+            if (bytes >= 1024 * 1024 * 1024)
+                return (bytes / (1024 * 1024 * 1024.0)).ToString("0.00") + " GB";
+            else if (bytes >= 1024 * 1024)
+                return (bytes / (1024 * 1024.0)).ToString("0.00") + " MB";
+            else if (bytes >= 1024)
+                return (bytes / 1024.0).ToString("0.00") + " KB";
+            else
+                return bytes + " B";
         }
 
         #region Navigacio
@@ -208,6 +233,8 @@ namespace TrunksCommander
             FileManager.TorolKijelolteket(oldal);
         }
 
+        #region Gombok, Frissítések, F-key Eventhandlerek
+
         private void CopyButton_Click(object sender, EventArgs e)
         {
             Masolas();
@@ -232,12 +259,14 @@ namespace TrunksCommander
         {
             LeftSideList.Focus();
             RightSideList.SelectedItems.Clear();
+            FrissitsKijeloltMeretet(PanelSide.Bal);
         }
 
         private void RightSideList_SelectedIndexChanged(object sender, EventArgs e)
         {
             RightSideList.Focus();
             LeftSideList.SelectedItems.Clear();
+            FrissitsKijeloltMeretet(PanelSide.Jobb);
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -288,5 +317,6 @@ namespace TrunksCommander
         {
             Mozgatas();
         }
+        #endregion
     }
 }
