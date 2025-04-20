@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("");
             this.LeftSideList = new System.Windows.Forms.ListView();
             this.Icon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -63,6 +63,12 @@
             this.RightDrives = new System.Windows.Forms.ComboBox();
             this.LeftLabel = new System.Windows.Forms.Label();
             this.RightLabel = new System.Windows.Forms.Label();
+            this.újMappaF7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.törlésF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyF5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveF6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewF3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +84,7 @@
             this.Datum});
             this.LeftSideList.HideSelection = false;
             this.LeftSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem9});
             this.LeftSideList.Location = new System.Drawing.Point(23, 118);
             this.LeftSideList.Name = "LeftSideList";
             this.LeftSideList.Size = new System.Drawing.Size(432, 244);
@@ -138,7 +144,7 @@
             this.columnHeader5});
             this.RightSideList.HideSelection = false;
             this.RightSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4});
+            listViewItem10});
             this.RightSideList.Location = new System.Drawing.Point(461, 118);
             this.RightSideList.Name = "RightSideList";
             this.RightSideList.Size = new System.Drawing.Size(429, 244);
@@ -221,6 +227,13 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.újMappaF7ToolStripMenuItem,
+            this.editF4ToolStripMenuItem,
+            this.törlésF8ToolStripMenuItem,
+            this.copyF5ToolStripMenuItem,
+            this.moveF6ToolStripMenuItem,
+            this.viewF3ToolStripMenuItem});
             this.fileToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.fileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("fileToolStripMenuItem.Image")));
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -345,6 +358,46 @@
             this.RightLabel.TabIndex = 16;
             this.RightLabel.Text = "label2";
             // 
+            // újMappaF7ToolStripMenuItem
+            // 
+            this.újMappaF7ToolStripMenuItem.Name = "újMappaF7ToolStripMenuItem";
+            this.újMappaF7ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.újMappaF7ToolStripMenuItem.Text = "Új Mappa (F7)";
+            this.újMappaF7ToolStripMenuItem.Click += new System.EventHandler(this.újMappaF7ToolStripMenuItem_Click);
+            // 
+            // törlésF8ToolStripMenuItem
+            // 
+            this.törlésF8ToolStripMenuItem.Name = "törlésF8ToolStripMenuItem";
+            this.törlésF8ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.törlésF8ToolStripMenuItem.Text = "Törlés (F8)";
+            this.törlésF8ToolStripMenuItem.Click += new System.EventHandler(this.törlésF8ToolStripMenuItem_Click);
+            // 
+            // copyF5ToolStripMenuItem
+            // 
+            this.copyF5ToolStripMenuItem.Name = "copyF5ToolStripMenuItem";
+            this.copyF5ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.copyF5ToolStripMenuItem.Text = "Copy (F5)";
+            this.copyF5ToolStripMenuItem.Click += new System.EventHandler(this.copyF5ToolStripMenuItem_Click);
+            // 
+            // moveF6ToolStripMenuItem
+            // 
+            this.moveF6ToolStripMenuItem.Name = "moveF6ToolStripMenuItem";
+            this.moveF6ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.moveF6ToolStripMenuItem.Text = "Move (F6)";
+            this.moveF6ToolStripMenuItem.Click += new System.EventHandler(this.moveF6ToolStripMenuItem_Click);
+            // 
+            // editF4ToolStripMenuItem
+            // 
+            this.editF4ToolStripMenuItem.Name = "editF4ToolStripMenuItem";
+            this.editF4ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.editF4ToolStripMenuItem.Text = "Edit (F4)";
+            // 
+            // viewF3ToolStripMenuItem
+            // 
+            this.viewF3ToolStripMenuItem.Name = "viewF3ToolStripMenuItem";
+            this.viewF3ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.viewF3ToolStripMenuItem.Text = "View (F3)";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +467,12 @@
         private System.Windows.Forms.ComboBox RightDrives;
         private System.Windows.Forms.Label LeftLabel;
         private System.Windows.Forms.Label RightLabel;
+        private System.Windows.Forms.ToolStripMenuItem újMappaF7ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem törlésF8ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyF5ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveF6ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editF4ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewF3ToolStripMenuItem;
     }
 }
 

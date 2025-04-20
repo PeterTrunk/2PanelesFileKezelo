@@ -268,5 +268,25 @@ namespace TrunksCommander
         {
             Close();
         }
+
+        private void újMappaF7ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UjMappa();
+        }
+
+        private void törlésF8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Torles();
+        }
+
+        private void copyF5ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Masolas();
+        }
+
+        private void moveF6ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Mozgatas();
+        }
     }
 }

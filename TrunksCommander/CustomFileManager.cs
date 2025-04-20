@@ -53,7 +53,7 @@ namespace TrunksCommander.Images
             try
             {
                 DirectoryInfo teszt = new DirectoryInfo(eleres);
-                if (teszt.Parent != null) //Root dir.-nek nincs "Parentje" (vagyis 0 van neki)
+                if (teszt.Parent != null) //Root dir.-nek nincs Parentje
                 {
                     var item = new ListViewItem();
                     item.ImageKey = "back.ico";
@@ -116,7 +116,6 @@ namespace TrunksCommander.Images
 
         }
         
-
         private string GetIkonKey(string ext)
         {
             if (ext == ".jpg" || ext == ".png") return "image.ico";
@@ -130,6 +129,7 @@ namespace TrunksCommander.Images
             return oldal == PanelSide.Bal ? BalTB.Text : JobbTB.Text;
         }
 
+        #region Másolás
         //Egyenlőre csak file másolás / áthelyezés... (egyszerűség)
         public void MasolVagyMozgatFajlokat(PanelSide forras, PanelSide cel, bool mozgat)
         {
@@ -142,7 +142,7 @@ namespace TrunksCommander.Images
                 string nev = item.SubItems[1].Text;
                 string tipus = item.SubItems[2].Text;
 
-                if (tipus != "Dir" && tipus != "Könyvtár") 
+                if (tipus != "Könyvtár") 
                 {
                     string forrasFajl = Path.Combine(forrasUt, nev);
                     string celFajl = Path.Combine(celUt, nev);
@@ -166,11 +166,14 @@ namespace TrunksCommander.Images
                 }
             }
 
-            //Frissitések
             BetoltKonyvtar(celUt, cel, cel == PanelSide.Bal ? BalLabel : JobbLabel);
             if (mozgat)
                 BetoltKonyvtar(forrasUt, forras, forras == PanelSide.Bal ? BalLabel : JobbLabel);
         }
+
+
+        
+        #endregion
 
         //Új mappa
         public void LetrehozUjMappa(PanelSide oldal)
