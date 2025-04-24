@@ -309,8 +309,7 @@ namespace TrunksCommander.Images
                 MessageBox.Show("Nincs kijelölt elem a törléshez.");
                 return;
             }
-
-            // Megerősítés
+            
             DialogResult valasz = MessageBox.Show(
                 $"Biztosan törölni szeretnéd a kijelölt {lv.SelectedItems.Count} elemet?",
                 "Törlés megerősítése",
@@ -338,8 +337,7 @@ namespace TrunksCommander.Images
                     MessageBox.Show($"Nem sikerült törölni: {nev}\n{ex.Message}");
                 }
             }
-
-            // Frissítés
+            
             BetoltKonyvtar(aktualisUt, oldal, label);
         }
 
@@ -375,9 +373,9 @@ namespace TrunksCommander.Images
                         meret += info.Length;
                         fajlSzam += 1;
                     }
-                    catch
+                    catch(Exception) 
                     {
-                        //IOexception, UnauthorizedAccess, stb kezelés esetleg késöbb.
+                        
                     }
                 }
             }
@@ -385,7 +383,7 @@ namespace TrunksCommander.Images
             return (fajlSzam, meret);
         }
 
-        //Segédfüggvény mappákban lévő fileok méret összegzésére
+        //Segédfüggvény mappákban lévő fileok méretének összegzésére
         private (int fajlDb, long osszMeret) OsszMappaMeret(string mappaUt)
         {
             int db = 0;
@@ -401,9 +399,9 @@ namespace TrunksCommander.Images
                         meret += info.Length;
                         db++;
                     }
-                    catch 
+                    catch(Exception)
                     {
-                        //IOexception, UnauthorizedAccess, stb kezelés esetleg késöbb.
+                        
                     }
                 }
             }

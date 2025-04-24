@@ -75,8 +75,9 @@ namespace TrunksCommander
         }
 
         #region Navigacio
+
         //NAVIGÁCIÓ
-        //
+
         private void LeftSideList_DoubleClick(object sender, EventArgs e)
         {
             LVDoubleClick(LeftSideList, PanelSide.Bal,LeftLabel);
@@ -107,6 +108,7 @@ namespace TrunksCommander
             if (nev == "[..]")
             {
                 string aktualisUt = FileManager.GetCurrentDirectory(oldal);
+                //?. operátor: null conditional operator, ha nem null érték akkor Fullname
                 string szuloUt = Directory.GetParent(aktualisUt)?.FullName;
 
                 if (!string.IsNullOrEmpty(szuloUt))
@@ -172,9 +174,9 @@ namespace TrunksCommander
         }
         #endregion
 
-        //MASOLÁS MOZGAZÁS TÖRLÉS stb gombok
-        //
-        //
+        //Funkciók fgv-i
+
+        //Tuple - csoportosított adat
         private (PanelSide forras, PanelSide cel) GetAktivPanelpar()
         {
             bool balKijelolt = LeftSideList.SelectedItems.Count > 0;
@@ -222,11 +224,13 @@ namespace TrunksCommander
             //MessageBox.Show($"Forrás: {forras}, Cél: {cel}");
             FileManager.MasolVagyMozgatFajlokat(forras, cel, true);
         }
+
         private void UjMappa()
         {
-            var (oldal, _ ) = GetAktivPanelpar();
+            var (oldal, _) = GetAktivPanelpar();
             FileManager.LetrehozUjMappa(oldal);
         }
+
         private void Torles()
         {
             var (oldal, _) = GetAktivPanelpar();
