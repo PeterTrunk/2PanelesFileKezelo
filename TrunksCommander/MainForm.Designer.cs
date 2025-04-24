@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("");
             this.LeftSideList = new System.Windows.Forms.ListView();
             this.Icon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -58,8 +58,8 @@
             this.moveF6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewF3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beállításokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ViewButton = new System.Windows.Forms.Button();
+            this.EditButton = new System.Windows.Forms.Button();
             this.CopyButton = new System.Windows.Forms.Button();
             this.MozgatButton = new System.Windows.Forms.Button();
             this.NewFolderButton = new System.Windows.Forms.Button();
@@ -86,7 +86,7 @@
             this.Datum});
             this.LeftSideList.HideSelection = false;
             this.LeftSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem21});
+            listViewItem9});
             this.LeftSideList.Location = new System.Drawing.Point(23, 118);
             this.LeftSideList.Name = "LeftSideList";
             this.LeftSideList.Size = new System.Drawing.Size(432, 244);
@@ -146,7 +146,7 @@
             this.columnHeader5});
             this.RightSideList.HideSelection = false;
             this.RightSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem22});
+            listViewItem10});
             this.RightSideList.Location = new System.Drawing.Point(461, 118);
             this.RightSideList.Name = "RightSideList";
             this.RightSideList.Size = new System.Drawing.Size(429, 244);
@@ -252,8 +252,9 @@
             // editF4ToolStripMenuItem
             // 
             this.editF4ToolStripMenuItem.Name = "editF4ToolStripMenuItem";
-            this.editF4ToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.editF4ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.editF4ToolStripMenuItem.Text = "Edit (F4)";
+            this.editF4ToolStripMenuItem.Click += new System.EventHandler(this.editF4ToolStripMenuItem_Click);
             // 
             // törlésF8ToolStripMenuItem
             // 
@@ -279,8 +280,9 @@
             // viewF3ToolStripMenuItem
             // 
             this.viewF3ToolStripMenuItem.Name = "viewF3ToolStripMenuItem";
-            this.viewF3ToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.viewF3ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.viewF3ToolStripMenuItem.Text = "View (F3)";
+            this.viewF3ToolStripMenuItem.Click += new System.EventHandler(this.viewF3ToolStripMenuItem_Click);
             // 
             // beállításokToolStripMenuItem
             // 
@@ -290,23 +292,25 @@
             this.beállításokToolStripMenuItem.Size = new System.Drawing.Size(112, 25);
             this.beállításokToolStripMenuItem.Text = "Beállítások";
             // 
-            // button1
+            // ViewButton
             // 
-            this.button1.Location = new System.Drawing.Point(23, 410);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "F3 View";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ViewButton.Location = new System.Drawing.Point(23, 410);
+            this.ViewButton.Name = "ViewButton";
+            this.ViewButton.Size = new System.Drawing.Size(75, 23);
+            this.ViewButton.TabIndex = 6;
+            this.ViewButton.Text = "F3 View";
+            this.ViewButton.UseVisualStyleBackColor = true;
+            this.ViewButton.Click += new System.EventHandler(this.ViewButton_Click);
             // 
-            // button2
+            // EditButton
             // 
-            this.button2.Location = new System.Drawing.Point(104, 410);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "F4 Edit";
-            this.button2.UseVisualStyleBackColor = true;
+            this.EditButton.Location = new System.Drawing.Point(104, 410);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(75, 23);
+            this.EditButton.TabIndex = 7;
+            this.EditButton.Text = "F4 Edit";
+            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // CopyButton
             // 
@@ -439,8 +443,8 @@
             this.Controls.Add(this.NewFolderButton);
             this.Controls.Add(this.MozgatButton);
             this.Controls.Add(this.CopyButton);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.EditButton);
+            this.Controls.Add(this.ViewButton);
             this.Controls.Add(this.RightPathBox);
             this.Controls.Add(this.LeftPathBox);
             this.Controls.Add(this.RightSideList);
@@ -483,8 +487,8 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beállításokToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ViewButton;
+        private System.Windows.Forms.Button EditButton;
         private System.Windows.Forms.Button CopyButton;
         private System.Windows.Forms.Button MozgatButton;
         private System.Windows.Forms.Button NewFolderButton;

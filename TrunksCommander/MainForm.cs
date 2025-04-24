@@ -123,7 +123,12 @@ namespace TrunksCommander
                 string ujUt = Path.Combine(aktualisUt, nev);
 
                 FileManager.BetoltKonyvtar(ujUt, oldal, label);
+
+                return;
             }
+
+            Megnez();
+
         }
         
         private void FrissitsMeghajtokComboBox(ComboBox combo)
@@ -237,7 +242,34 @@ namespace TrunksCommander
             FileManager.TorolKijelolteket(oldal);
         }
 
+        private void Megnez()
+        {
+            var (oldal, _) = GetAktivPanelpar();
+            FileManager.SzerkesztVagyMegnez(oldal, false);
+        }
+
+        private void Szerkeszt()
+        {
+            var (oldal, _) = GetAktivPanelpar();
+            FileManager.SzerkesztVagyMegnez(oldal, true);
+        }
+
         #region Gombok, Frissítések, F-key Eventhandlerek
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ViewButton_Click(object sender, EventArgs e)
+        {
+            Megnez();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            Szerkeszt();
+        }
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
@@ -275,12 +307,22 @@ namespace TrunksCommander
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.F4)
+            {
+                Megnez();
+                e.Handled = true;
+            }
+            if (e.KeyCode == Keys.F4)
+            {
+                Szerkeszt();
+                e.Handled = true;
+            }
             if (e.KeyCode == Keys.F5)
             {
                 Masolas();
                 e.Handled = true;
             }
-            else if (e.KeyCode == Keys.F6)
+            if (e.KeyCode == Keys.F6)
             {
                 Mozgatas();
                 e.Handled = true;
@@ -297,9 +339,14 @@ namespace TrunksCommander
             }
         }
 
-        private void ExitButton_Click(object sender, EventArgs e)
+        private void viewF3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            Megnez();
+        }
+
+        private void editF4ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Szerkeszt();
         }
 
         private void újMappaF7ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,6 +368,8 @@ namespace TrunksCommander
         {
             Mozgatas();
         }
+
         #endregion
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -59,7 +60,7 @@ namespace TrunksCommander.Images
                 DirectoryInfo teszt = new DirectoryInfo(eleres);
                 if (teszt.Parent != null) //Root dir.-nek nincs Parentje
                 {
-                    var item = new ListViewItem();
+                    ListViewItem item = new ListViewItem();
                     item.ImageKey = "back.ico";
                     item.SubItems.Add("[..]");
                     item.SubItems.Add("Könyvtár");
@@ -73,7 +74,7 @@ namespace TrunksCommander.Images
                 foreach (string mappa in Directory.GetDirectories(eleres))
                 {
                     DirectoryInfo info = new DirectoryInfo(mappa);
-                    var item = new ListViewItem();
+                    ListViewItem item = new ListViewItem();
                     item.ImageKey = "folder.ico";
                     item.SubItems.Add(info.Name);
                     item.SubItems.Add("Könyvtár");
@@ -90,7 +91,7 @@ namespace TrunksCommander.Images
                     string kiterjesztes = info.Extension.ToLower();
                     string ikon = GetIkonKey(kiterjesztes);
 
-                    var item = new ListViewItem();
+                    ListViewItem item = new ListViewItem();
                     item.ImageKey = ikon;
                     item.SubItems.Add(info.Name);
                     item.SubItems.Add(kiterjesztes);
@@ -162,12 +163,14 @@ namespace TrunksCommander.Images
 
         private string GetIkonKey(string ext)
         {
-            if (ext == ".jpg" || ext == ".png") return "image.ico";
+            if (ext == ".jpg" || ext == ".png") return "kep.ico";
             if (ext == ".mp4" || ext == ".avi") return "video.ico";
             if (ext == ".txt") return "text.ico";
+            if (ext == ".exe") return "exe.ico";
+            if (ext == ".mp3") return "zene.ico";
             return "file.ico";
         }
-
+        
         public string GetCurrentDirectory(PanelSide oldal)
         {
             return oldal == PanelSide.Bal ? BalTB.Text : JobbTB.Text;
@@ -339,6 +342,49 @@ namespace TrunksCommander.Images
             }
             
             BetoltKonyvtar(aktualisUt, oldal, label);
+        }
+
+        #endregion
+
+        #region View / Edit
+
+        public void SzerkesztVagyMegnez(PanelSide oldal, bool szerkesztes)
+        {
+            ListView lv = oldal == PanelSide.Bal ? BalLV : JobbLV;
+
+            if (lv.SelectedItems.Count == 0)
+                return;
+
+            ListViewItem item = lv.SelectedItems[0];
+            string nev = item.SubItems[1].Text;
+            string tipus = item.SubItems[2].Text;
+
+            if (tipus == "Könyvtár")
+                return;
+
+            string ut = GetCurrentDirectory(oldal);
+            string fajlPath = Path.Combine(ut, nev);
+
+            try
+            {
+                if (szerkesztes)
+                {
+                    // Fix szerkesztő
+                    Process.Start("notepad.exe", $"\"{fajlPath}\"");
+                }
+                else
+                {
+                    // Alapértelmezett programmal való megnyitás
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        FileName = fajlPath, UseShellExecute = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Nem sikerült megnyitni a fájlt:\n{ex.Message}");
+            }
         }
 
         #endregion
