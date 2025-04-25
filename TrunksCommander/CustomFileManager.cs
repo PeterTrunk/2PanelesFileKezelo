@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
 namespace TrunksCommander.Images
 {
@@ -21,6 +16,7 @@ namespace TrunksCommander.Images
         Label JobbLabel;
         Label BalMeretLabel;
         Label JobbMeretLabel;
+        
 
         public enum PanelSide
         {
@@ -74,7 +70,7 @@ namespace TrunksCommander.Images
                 foreach (string mappa in Directory.GetDirectories(eleres))
                 {
                     DirectoryInfo info = new DirectoryInfo(mappa);
-                    ListViewItem item = new ListViewItem();
+                    var item = new ListViewItem();
                     item.ImageKey = "folder.ico";
                     item.SubItems.Add(info.Name);
                     item.SubItems.Add("Könyvtár");
@@ -83,7 +79,7 @@ namespace TrunksCommander.Images
 
                     celListView.Items.Add(item);
                 }
-                
+
                 int fajlCount = Directory.GetFiles(eleres).Length;
                 foreach (string fajl in Directory.GetFiles(eleres))
                 {
@@ -118,7 +114,7 @@ namespace TrunksCommander.Images
         }
 
         #region Általábos segítő fgv-k
-
+        
         private string GetEgyediFajlNev(string celKonyvtar, string fajlNev)
         {
             //Windowshoz hasonlóan írja oda: filenév másolata, filenév másolata (1)...

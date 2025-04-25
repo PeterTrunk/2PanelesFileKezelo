@@ -20,3 +20,7 @@ C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\obj\Debug\TrunksC
 C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\obj\Debug\TrunksCommander.csproj.CoreCompileInputs.cache
 C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\obj\Debug\TrunksCommander.exe
 C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\obj\Debug\TrunksCommander.pdb
+C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\bin\Debug\Newtonsoft.Json.dll
+C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\bin\Debug\Newtonsoft.Json.xml
+C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\obj\Debug\TrunksCommander.BeallitasokForm.resources
+C:\Users\trunk\Source\Repos\2PanelesFileKezelo\TrunksCommander\obj\Debug\TrunksCo.25D0B639.Up2Date

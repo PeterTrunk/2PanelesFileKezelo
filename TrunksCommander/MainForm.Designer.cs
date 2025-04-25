@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.LeftSideList = new System.Windows.Forms.ListView();
             this.Icon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.FileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -86,7 +86,7 @@
             this.Datum});
             this.LeftSideList.HideSelection = false;
             this.LeftSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9});
+            listViewItem1});
             this.LeftSideList.Location = new System.Drawing.Point(23, 118);
             this.LeftSideList.Name = "LeftSideList";
             this.LeftSideList.Size = new System.Drawing.Size(432, 244);
@@ -146,7 +146,7 @@
             this.columnHeader5});
             this.RightSideList.HideSelection = false;
             this.RightSideList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem10});
+            listViewItem2});
             this.RightSideList.Location = new System.Drawing.Point(461, 118);
             this.RightSideList.Name = "RightSideList";
             this.RightSideList.Size = new System.Drawing.Size(429, 244);
@@ -252,7 +252,7 @@
             // editF4ToolStripMenuItem
             // 
             this.editF4ToolStripMenuItem.Name = "editF4ToolStripMenuItem";
-            this.editF4ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.editF4ToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
             this.editF4ToolStripMenuItem.Text = "Edit (F4)";
             this.editF4ToolStripMenuItem.Click += new System.EventHandler(this.editF4ToolStripMenuItem_Click);
             // 
@@ -280,7 +280,7 @@
             // viewF3ToolStripMenuItem
             // 
             this.viewF3ToolStripMenuItem.Name = "viewF3ToolStripMenuItem";
-            this.viewF3ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.viewF3ToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
             this.viewF3ToolStripMenuItem.Text = "View (F3)";
             this.viewF3ToolStripMenuItem.Click += new System.EventHandler(this.viewF3ToolStripMenuItem_Click);
             // 
@@ -291,6 +291,7 @@
             this.beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
             this.beállításokToolStripMenuItem.Size = new System.Drawing.Size(112, 25);
             this.beállításokToolStripMenuItem.Text = "Beállítások";
+            this.beállításokToolStripMenuItem.Click += new System.EventHandler(this.beállításokToolStripMenuItem_Click);
             // 
             // ViewButton
             // 

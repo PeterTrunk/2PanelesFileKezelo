@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrunksCommander.Images;
 using static TrunksCommander.Images.CustomFileManager;
-using Microsoft.VisualBasic;
 
 namespace TrunksCommander
 {
@@ -22,18 +15,21 @@ namespace TrunksCommander
         }
 
         private CustomFileManager FileManager;
+        private Beallitasok Beallitasok;
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.KeyPreview = true;
+            Beallitasok = BeallitasKezelo.Betolt();
             FileManager = new CustomFileManager(LeftSideList, RightSideList, IkonLista, LeftPathBox,RightPathBox,LeftLabel,RightLabel,LeftOsszegLabel,RightOsszegLabel);
-            string alaput = @"C:\";
-            ControlInicializacio(alaput);
+            
+            ControlInicializacio(Beallitasok.AlapKonyvtar);
+            TemaErvenyesit(Beallitasok.Tema);
         }
-        private void ControlInicializacio(string alaput)
+        private void ControlInicializacio(string Ut)
         {
-            FileManager.BetoltKonyvtar(alaput, CustomFileManager.PanelSide.Bal,LeftLabel);
-            FileManager.BetoltKonyvtar(alaput, CustomFileManager.PanelSide.Jobb, RightLabel);
+            FileManager.BetoltKonyvtar(Ut, CustomFileManager.PanelSide.Bal, LeftLabel);
+            FileManager.BetoltKonyvtar(Ut, CustomFileManager.PanelSide.Jobb, RightLabel);
             FrissitsMeghajtokComboBox(LeftDrives);
             FrissitsMeghajtokComboBox(RightDrives);
             FrissitsKijeloltMeretet(PanelSide.Bal);
@@ -46,10 +42,81 @@ namespace TrunksCommander
             FileManager.BetoltKonyvtar(RightPathBox.Text, CustomFileManager.PanelSide.Jobb, RightLabel);
         }
 
-        private void frissítésToolStripMenuItem_Click(object sender, EventArgs e)
+        #region Téma
+
+        private void beállításokToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frissit();
+            BeallitasokForm Form = new BeallitasokForm(Beallitasok);
+            if (Form.ShowDialog() == DialogResult.OK)
+            {
+                Beallitasok Uj = Form.Mentett;
+                Beallitasok = Uj;
+                TemaErvenyesit(Uj.Tema);
+                BeallitasKezelo.Ment(Beallitasok);
+            }
         }
+
+        private void TemaErvenyesit(string Tema)
+        {
+            if (Tema == "vilagos")
+                Szinez(Color.White,Color.Black);
+            else
+                Szinez(Color.FromArgb(30, 30, 30), Color.White);
+        }
+
+        private void Szinez(Color Hatter, Color Betu)
+        {
+            BackColor = Hatter;
+            
+            foreach (Control ctrl in Controls)
+            {
+                if (ctrl is Button btn)
+                {
+                    btn.BackColor = Hatter;
+                    btn.ForeColor = Betu;
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.FlatAppearance.BorderColor = Color.Gray;
+                }
+                else if (ctrl is Label lbl)
+                {
+                    lbl.ForeColor = Betu;
+                    lbl.BackColor = Color.Transparent;
+                }
+                else if (ctrl is TextBox tb)
+                {
+                    tb.BackColor = Hatter;
+                    tb.ForeColor = Betu;
+                    tb.BorderStyle = BorderStyle.FixedSingle;
+                }
+                else if (ctrl is ComboBox cb)
+                {
+                    cb.BackColor = Hatter;
+                    cb.ForeColor = Betu;
+                    cb.FlatStyle = FlatStyle.Flat;
+                    cb.DropDownStyle = ComboBoxStyle.DropDownList;
+                }
+                else if (ctrl is ListView lv)
+                {
+                    lv.BackColor = Hatter;
+                    lv.ForeColor = Betu;
+                    lv.GridLines = true;
+                    lv.FullRowSelect = true;
+
+                }
+                else if (ctrl is MenuStrip ms)
+                {
+                    ms.BackColor = Hatter;
+                    ms.ForeColor = Betu;
+                    ms.RenderMode = ToolStripRenderMode.System;
+                }
+                else if (ctrl is ToolStrip tool)
+                {
+                    tool.BackColor = Hatter;
+                    tool.ForeColor = Betu;
+                }
+            }
+        }
+        #endregion
 
         private void FrissitsKijeloltMeretet(PanelSide oldal)
         {
@@ -141,7 +208,7 @@ namespace TrunksCommander
                     combo.Items.Add(drive.Name);
                 }
             }
-            combo.SelectedIndex = 0;
+            //combo.SelectedIndex = 0;
         }
 
         private void LeftDrives_SelectedIndexChanged(object sender, EventArgs e)
@@ -178,9 +245,7 @@ namespace TrunksCommander
             }
         }
         #endregion
-
-        //Funkciók fgv-i
-
+        
         //Tuple - csoportosított adat
         private (PanelSide forras, PanelSide cel) GetAktivPanelpar()
         {
@@ -369,7 +434,13 @@ namespace TrunksCommander
             Mozgatas();
         }
 
+        private void frissítésToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frissit();
+        }
+        
         #endregion
+
 
     }
 }
