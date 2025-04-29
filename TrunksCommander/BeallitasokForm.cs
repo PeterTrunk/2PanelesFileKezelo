@@ -24,6 +24,7 @@ namespace TrunksCommander
         {
             TemaComboBox.Items.Add("Világos");
             TemaComboBox.Items.Add("Sötét");
+
             if (Jelenlegi.Tema == "vilagos")
                 TemaComboBox.SelectedIndex = 0;
             else
@@ -37,7 +38,7 @@ namespace TrunksCommander
         {
             FolderBrowserDialog Talloz = new FolderBrowserDialog();
             Talloz.Description = "Válassza ki az új kezdő könyvtárat!";
-            string eleres = "";
+            string eleres;
             if (Talloz.ShowDialog() == DialogResult.OK)
             {
                 eleres = Talloz.SelectedPath;

@@ -21,8 +21,8 @@ namespace TrunksCommander
         {
             this.KeyPreview = true;
             Beallitasok = BeallitasKezelo.Betolt();
-            FileManager = new CustomFileManager(LeftSideList, RightSideList, IkonLista, LeftPathBox,RightPathBox,LeftLabel,RightLabel,LeftOsszegLabel,RightOsszegLabel);
-            
+            FileManager = new CustomFileManager(LeftSideList, RightSideList, IkonLista, LeftPathBox, RightPathBox, LeftLabel, RightLabel, LeftOsszegLabel, RightOsszegLabel);
+
             ControlInicializacio(Beallitasok.AlapKonyvtar);
             TemaErvenyesit(Beallitasok.Tema);
         }
@@ -42,7 +42,31 @@ namespace TrunksCommander
             FileManager.BetoltKonyvtar(RightPathBox.Text, CustomFileManager.PanelSide.Jobb, RightLabel);
         }
 
-        #region Téma
+        //Tuple - csoportosított adat
+        private (PanelSide forras, PanelSide cel) GetAktivPanelpar()
+        {
+            bool balKijelolt = LeftSideList.SelectedItems.Count > 0;
+            bool jobbKijelolt = RightSideList.SelectedItems.Count > 0;
+
+            // Csak egyik oldalon van kijelölés
+            if (balKijelolt && !jobbKijelolt)
+                return (PanelSide.Bal, PanelSide.Jobb);
+
+            if (jobbKijelolt && !balKijelolt)
+                return (PanelSide.Jobb, PanelSide.Bal);
+
+            // Mindkét oldalon van kijelölés → döntés fókusz alapján
+            if (LeftSideList.Focused)
+                return (PanelSide.Bal, PanelSide.Jobb);
+
+            if (RightSideList.Focused)
+                return (PanelSide.Jobb, PanelSide.Bal);
+
+            // Ha semmi nincs kijelölve, fallback
+            return (PanelSide.Bal, PanelSide.Jobb);
+        }
+
+        #region Téma beállítása
 
         private void beállításokToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -59,7 +83,7 @@ namespace TrunksCommander
         private void TemaErvenyesit(string Tema)
         {
             if (Tema == "vilagos")
-                Szinez(Color.White,Color.Black);
+                Szinez(Color.White, Color.Black);
             else
                 Szinez(Color.FromArgb(30, 30, 30), Color.White);
         }
@@ -67,7 +91,7 @@ namespace TrunksCommander
         private void Szinez(Color Hatter, Color Betu)
         {
             BackColor = Hatter;
-            
+
             foreach (Control ctrl in Controls)
             {
                 if (ctrl is Button btn)
@@ -118,6 +142,7 @@ namespace TrunksCommander
         }
         #endregion
 
+        #region Kijelölt méret számítás
         private void FrissitsKijeloltMeretet(PanelSide oldal)
         {
             var (db, meret) = FileManager.OsszKijeloltMeret(oldal);
@@ -128,7 +153,7 @@ namespace TrunksCommander
             else
                 RightOsszegLabel.Text = text;
         }
-
+        //To-do: Valahogy megoldani hogy ne fagyassza be a futást, szálkezelés...
         private string FormatMeret(long bytes)
         {
             if (bytes >= 1024 * 1024 * 1024)
@@ -140,6 +165,7 @@ namespace TrunksCommander
             else
                 return bytes + " B";
         }
+        #endregion
 
         #region Navigacio
 
@@ -147,15 +173,15 @@ namespace TrunksCommander
 
         private void LeftSideList_DoubleClick(object sender, EventArgs e)
         {
-            LVDoubleClick(LeftSideList, PanelSide.Bal,LeftLabel);
+            LVDoubleClick(LeftSideList, PanelSide.Bal, LeftLabel);
         }
 
         private void RightSideList_DoubleClick(object sender, EventArgs e)
         {
-            LVDoubleClick(RightSideList, PanelSide.Jobb,RightLabel);
+            LVDoubleClick(RightSideList, PanelSide.Jobb, RightLabel);
         }
-        
-        private void LVDoubleClick(ListView lv, PanelSide oldal,Label label)
+
+        private void LVDoubleClick(ListView lv, PanelSide oldal, Label label)
         {
             Valasztas(lv, oldal, label);
         }
@@ -197,7 +223,7 @@ namespace TrunksCommander
             Megnez();
 
         }
-        
+
         private void FrissitsMeghajtokComboBox(ComboBox combo)
         {
             combo.Items.Clear();
@@ -221,10 +247,10 @@ namespace TrunksCommander
             DriveKivalaszt(RightDrives, PanelSide.Jobb, RightLabel);
         }
 
-        private void DriveKivalaszt(ComboBox cb,CustomFileManager.PanelSide oldal,Label label)
+        private void DriveKivalaszt(ComboBox cb, CustomFileManager.PanelSide oldal, Label label)
         {
             string valasztottUt = cb.SelectedItem.ToString();
-            FileManager.BetoltKonyvtar(valasztottUt, oldal,label);
+            FileManager.BetoltKonyvtar(valasztottUt, oldal, label);
         }
 
         private void LeftSideList_KeyDown(object sender, KeyEventArgs e)
@@ -245,32 +271,8 @@ namespace TrunksCommander
             }
         }
         #endregion
-        
-        //Tuple - csoportosított adat
-        private (PanelSide forras, PanelSide cel) GetAktivPanelpar()
-        {
-            bool balKijelolt = LeftSideList.SelectedItems.Count > 0;
-            bool jobbKijelolt = RightSideList.SelectedItems.Count > 0;
 
-            // Csak egyik oldalon van kijelölés
-            if (balKijelolt && !jobbKijelolt)
-                return (PanelSide.Bal, PanelSide.Jobb);
-
-            if (jobbKijelolt && !balKijelolt)
-                return (PanelSide.Jobb, PanelSide.Bal);
-
-            // Mindkét oldalon van kijelölés → döntés fókusz alapján
-            if (LeftSideList.Focused)
-                return (PanelSide.Bal, PanelSide.Jobb);
-
-            if (RightSideList.Focused)
-                return (PanelSide.Jobb, PanelSide.Bal);
-
-            // Ha semmi nincs kijelölve, fallback
-            return (PanelSide.Bal, PanelSide.Jobb);
-        }
-
-
+        #region Funkciók-fgv-i
         private void Masolas()
         {
             if (LeftSideList.SelectedItems.Count == 0 && RightSideList.SelectedItems.Count == 0)
@@ -318,6 +320,7 @@ namespace TrunksCommander
             var (oldal, _) = GetAktivPanelpar();
             FileManager.SzerkesztVagyMegnez(oldal, true);
         }
+        #endregion
 
         #region Gombok, Frissítések, F-key Eventhandlerek
 
@@ -438,9 +441,9 @@ namespace TrunksCommander
         {
             Frissit();
         }
-        
+
         #endregion
 
 
-    }
+    } 
 }

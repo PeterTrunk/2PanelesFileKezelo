@@ -17,7 +17,6 @@ namespace TrunksCommander.Images
         Label BalMeretLabel;
         Label JobbMeretLabel;
         
-
         public enum PanelSide
         {
             Bal,
@@ -47,6 +46,7 @@ namespace TrunksCommander.Images
             lv.SmallImageList = IkonLista;
         }
 
+        //Listázó függvény
         public void BetoltKonyvtar(string eleres, PanelSide oldal,Label label)
         {
             ListView celListView = oldal == PanelSide.Bal ? BalLV : JobbLV;
@@ -117,7 +117,7 @@ namespace TrunksCommander.Images
         
         private string GetEgyediFajlNev(string celKonyvtar, string fajlNev)
         {
-            //Windowshoz hasonlóan írja oda: filenév másolata, filenév másolata (1)...
+            
             string nev = Path.GetFileNameWithoutExtension(fajlNev);
             string kiterjesztes = Path.GetExtension(fajlNev);
 
@@ -126,6 +126,7 @@ namespace TrunksCommander.Images
             if (!File.Exists(elsoPath))
                 return elso;
 
+            //Windowshoz hasonlóan írja ki a file másolatok neveit: filenév másolata, filenév másolata (1)...
             int index = 1;
             string ujNev;
             do
@@ -177,7 +178,7 @@ namespace TrunksCommander.Images
 
         public void MasolVagyMozgatFajlokat(PanelSide forras, PanelSide cel, bool mozgat)
         {
-            ListView forrasLV = forras == PanelSide.Bal ? BalLV : JobbLV;
+            ListView forrasLV = (forras == PanelSide.Bal ? BalLV : JobbLV);
             string forrasUt = GetCurrentDirectory(forras);
             string celUt = GetCurrentDirectory(cel);
 
@@ -213,17 +214,17 @@ namespace TrunksCommander.Images
                                 MessageBoxIcon.Question
                             );
 
-                            if (valasz == DialogResult.Cancel)
+                            if (valasz == DialogResult.Cancel) //Abbort
                                 continue;
-                            else if (valasz == DialogResult.No)
+                            else if (valasz == DialogResult.No) //Nem írja felül
                             {
                                 // új név
                                 string ujNev = GetEgyediFajlNev(celUt, nev);
                                 string ujCelFajl = Path.Combine(celUt, ujNev);
                                 File.Copy(forrasElem, ujCelFajl);
                             }
-                            else if (valasz == DialogResult.Yes)
-                                File.Copy(forrasElem, celElem, overwrite: true);
+                            else if (valasz == DialogResult.Yes) //Felülírás
+                                File.Copy(forrasElem, celElem, overwrite: true); 
                         }
                         else
                             File.Copy(forrasElem, celElem);
@@ -236,16 +237,16 @@ namespace TrunksCommander.Images
                 }
             }
 
-            Label celLabel = cel == PanelSide.Bal ? BalLabel : JobbLabel;
+            Label celLabel = (cel == PanelSide.Bal ? BalLabel : JobbLabel);
             BetoltKonyvtar(celUt, cel, celLabel);
             if (mozgat)
             {
-                Label forrasLabel = forras == PanelSide.Bal ? BalLabel : JobbLabel;
+                Label forrasLabel = (forras == PanelSide.Bal ? BalLabel : JobbLabel);
                 BetoltKonyvtar(forrasUt, forras, forrasLabel);
             }
         }
 
-        //Másolás/Mozgazás segítő fgv ha mappárol van szó, rekurzív.
+        //Másolás/Mozgazás segítő fgv ha mappárol van szó, rekurzíó.
         private void MasolMappat(string forrasDir, string celDir)
         {
             Directory.CreateDirectory(celDir);
@@ -256,6 +257,7 @@ namespace TrunksCommander.Images
                 File.Copy(fajl, celFajl, overwrite: true);
             }
 
+            //DFS
             foreach (string almappa in Directory.GetDirectories(forrasDir))
             {
                 string mappaNev = Path.GetFileName(almappa);
@@ -326,7 +328,7 @@ namespace TrunksCommander.Images
 
                 try
                 {
-                    if (tipus == "Könyvtár" || tipus == "Dir")
+                    if (tipus == "Könyvtár")
                         Directory.Delete(teljesUt, recursive: true);
                     else
                         File.Delete(teljesUt);
@@ -447,7 +449,7 @@ namespace TrunksCommander.Images
                     }
                 }
             }
-            catch
+            catch(Exception)
             {
                 
             }

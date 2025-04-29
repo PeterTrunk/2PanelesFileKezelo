@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TrunksCommander
 {
-    class BeallitasKezelo
+    static class BeallitasKezelo
     {
         private static readonly string fajlUt = "beallitasok.json";
 
